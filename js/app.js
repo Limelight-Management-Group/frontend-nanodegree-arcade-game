@@ -2,10 +2,10 @@
 var Enemy = function() {
     // Variables applied to each of our instances go here,
     // we've provided one for you to get started
-
     // The image/sprite for our enemies, this uses
     // a helper we've provided to easily load images
     this.sprite = 'images/enemy-bug.png';
+    this.reset();
 };
 
 // Update the enemy's position, required method for game
@@ -15,17 +15,40 @@ Enemy.prototype.update = function(dt) {
     // which will ensure the game runs at the same speed for
     // all computers.
 };
+Enemy.prototype.reset = function(){
+    this.x = origin;
+    this.y = this.pathPicker;
+    this.speed = this.speed = Math.floor(Math.random(150) * 100);
+};
 
 // Draw the enemy on the screen, required method for game
 Enemy.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 
+const allEnemies = []
+
+for (var i = 10; i > 0; i--) {
+    allEnemies.push(new Enemy(20, 30))
+}
+
 // Now write your own player class
+var Player = function(start, x, y){
+    this.x = x;
+    this.y = y;
+    this.start = x, y;
+}
+Player.prototype.update = function(dt){
+    this.handleCollision();
+};
+
+Player.prototype.render = function(){console.log("This is working too...")}
+Player.prototype.handleInput = function(){console.log("This is working...")}
+Player.prototype.handleCollision = function(){}
 // This class requires an update(), render() and
 // a handleInput() method.
 
-
+var player = new Player(10, 3, 4);
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
